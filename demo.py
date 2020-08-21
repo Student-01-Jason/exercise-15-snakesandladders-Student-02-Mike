@@ -33,7 +33,14 @@ class Player:
         return random.randint(1, 6)
 
     def move(self, step):
-        #TODO
+        self.position += step
+        for bottom, top in self.game.ladders.items():
+            if self.position == bottom:
+                self.position = top
+        for head, tail in self.game.snakes.items():
+            if self.position == head:
+                self.position = tail
+        return self.position
 
     def win(self):
         if self.position >= self.game.grid:
